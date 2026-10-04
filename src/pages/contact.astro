@@ -1,74 +1,62 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Contact — Axel KAMGAING KOM" description="Formulaire de contact direct et coordonnées professionnelles d'Axel KAMGAING KOM.">
-  <header class="page-hero shell">
-    <div class="eyebrow-pill">
-      <span>COMMUNICATION</span>
-    </div>
-    <h1 class="headline-apple">Échanger sur un projet<br/>ou une opportunité.</h1>
-    <p class="lead-apple">
-      Une question technique, une proposition de mission ou un projet d'infrastructure ? Transmettez votre message ci-dessous.
-    </p>
-  </header>
+<BaseLayout title="Contact — Axel KAMGAING KOM" description="Prendre contact avec Axel KAMGAING KOM">
+  <div class="shell">
+    <header class="hero-block">
+      <span class="section-label">Échange & Opportunités</span>
+      <h1 class="hero-headline">Contact</h1>
+      <p class="hero-lead">
+        À l'écoute d'opportunités professionnelles en ingénierie systèmes, réseaux et cybersécurité.
+      </p>
+    </header>
 
-  <section class="shell contact-wrapper">
-    <div class="contact-grid">
-      <div class="contact-info-panel">
-        <span class="bento-badge">COORDONNÉES</span>
-        <h2 class="contact-heading">Canaux professionnels</h2>
-        <p class="contact-subtext">
-          Basé en Région Parisienne (Vincennes), disponible pour des échanges techniques et opérationnels.
-        </p>
+    <section class="page-section">
+      <div class="grid-2">
+        <div class="jp-card">
+          <span class="section-label">Coordonnées directes</span>
+          <h2 style="font-size: 1.25rem; margin-bottom: 16px;">Pour me joindre</h2>
+          <ul style="display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem;">
+            <li>
+              <span style="color: var(--text-muted); display: block; font-size: 0.82rem;">EMAIL</span>
+              <a href="mailto:axel@komjordan.fr" style="color: var(--accent); font-weight: 500;">axel@komjordan.fr</a>
+            </li>
+            <li>
+              <span style="color: var(--text-muted); display: block; font-size: 0.82rem;">TÉLÉPHONE</span>
+              <a href="tel:+33745497357" style="color: var(--text);">+33 7 45 49 73 57</a>
+            </li>
+            <li>
+              <span style="color: var(--text-muted); display: block; font-size: 0.82rem;">LOCALISATION</span>
+              <span>Île-de-France (mobilité nationale & internationale)</span>
+            </li>
+          </ul>
+        </div>
 
-        <div class="channel-list">
-          <a class="channel-item" href="mailto:axel@komjordan.fr">
-            <span class="channel-icon">@</span>
-            <div>
-              <span class="channel-label">Email direct</span>
-              <span class="channel-val">axel@komjordan.fr</span>
-            </div>
-          </a>
-          <a class="channel-item" href="https://www.linkedin.com/in/komjordan" target="_blank" rel="noreferrer">
-            <span class="channel-icon">in</span>
-            <div>
-              <span class="channel-label">LinkedIn</span>
-              <span class="channel-val">linkedin.com/in/komjordan</span>
-            </div>
-          </a>
-          <a class="channel-item" href="https://github.com/komjordan" target="_blank" rel="noreferrer">
-            <span class="channel-icon">git</span>
-            <div>
-              <span class="channel-label">GitHub</span>
-              <span class="channel-val">github.com/komjordan</span>
-            </div>
-          </a>
+        <div class="jp-card">
+          <span class="section-label">Présence en ligne</span>
+          <h2 style="font-size: 1.25rem; margin-bottom: 16px;">Réseaux & Plateformes</h2>
+          <ul style="display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem;">
+            <li>
+              <a href="https://www.linkedin.com/in/komjordan" target="_blank" rel="noreferrer" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
+                <span>LinkedIn</span>
+                <span style="color: var(--accent);">in/komjordan →</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/komjordan" target="_blank" rel="noreferrer" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
+                <span>GitHub</span>
+                <span style="color: var(--accent);">@komjordan →</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://komiapply.komjordan.fr" target="_blank" rel="noreferrer" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
+                <span>KomiApply</span>
+                <span style="color: var(--accent);">komiapply.komjordan.fr →</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-
-      <div class="contact-form-card">
-        <form action="https://formspree.io/f/xovdokao" method="POST" class="apple-form">
-          <div class="form-field">
-            <label for="name">Nom ou Organisation</label>
-            <input type="text" id="name" name="name" required placeholder="Votre nom" />
-          </div>
-          <div class="form-field">
-            <label for="email">Adresse Email</label>
-            <input type="email" id="email" name="email" required placeholder="nom@entreprise.com" />
-          </div>
-          <div class="form-field">
-            <label for="subject">Objet</label>
-            <input type="text" id="subject" name="subject" placeholder="Ingénierie, sécurité, échange technique..." />
-          </div>
-          <div class="form-field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required placeholder="Détaillez votre demande ou votre projet..."></textarea>
-          </div>
-          <button type="submit" class="cta-primary" style="width: 100%; justify-content: center;">
-            Envoyer le message <span>→</span>
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>

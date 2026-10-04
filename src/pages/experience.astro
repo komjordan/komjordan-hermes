@@ -6,8 +6,8 @@ const roles = [
     dates: 'Nov. 2022 — Oct. 2023',
     role: 'Administrateur Réseaux & Systèmes',
     org: 'Stones and Gold',
-    type: 'CDI · Infrastructure & Production',
-    points: [
+    context: 'CDI · Infrastructure & Production',
+    missions: [
       'Supervision proactive du parc de serveurs avec Centreon (définition des seuils critiques, escalade et métrologie).',
       'Plan de sauvegarde et restauration des machines virtuelles critiques avec Veeam Backup & Replication ; support N1/N2.',
       'Administration globale Active Directory (AD DS, contrôleurs de domaine, règles GPO durcies et gestion des habilitations).',
@@ -18,8 +18,8 @@ const roles = [
     dates: 'Janv. 2022 — Août 2022',
     role: 'Assistant Administrateur Réseaux',
     org: 'SIGERIS SARL',
-    type: 'Stage & Mission · Ingénierie Réseau',
-    points: [
+    context: 'Stage & Mission · Ingénierie Réseau',
+    missions: [
       'Déploiement et segmentation de commutateurs managés : VLANs par service, Spanning Tree (STP) et priorisation QoS.',
       'Configuration du routage dynamique OSPF et BGP, filtrage par listes de contrôle d’accès (ACLs) sur équipements Cisco.',
       'Gestion des services d’infrastructure DHCP, DNS, FTP et annuaire Active Directory ; tests de performance et procédures.'
@@ -29,8 +29,8 @@ const roles = [
     dates: 'Juil. 2019 — Août 2019',
     role: 'Stagiaire Télécoms & VoIP',
     org: 'IUEs / INSAM',
-    type: 'Stage académique · Bafoussam',
-    points: [
+    context: 'Stage académique · Bafoussam',
+    missions: [
       'Conception et intégration d’un commutateur IPBX sous Linux avec Asterisk.',
       'Configuration et répartition des postes SIP, plans de numérotation, validation des flux voix et rédaction des guides.'
     ]
@@ -39,8 +39,8 @@ const roles = [
     dates: 'Sept. 2016 — Juil. 2018',
     role: 'Technicien Informatique',
     org: 'Envol Learn and Travel',
-    type: 'Support & Maintenance',
-    points: [
+    context: 'Support & Maintenance',
+    missions: [
       'Surveillance continue des services réseau avec Nagios et gestion rigoureuse des incidents via la billetterie GLPI.',
       'Dépannage matériel, déploiement système, câblage et maintenance de caméras de vidéosurveillance IP.',
       'Sensibilisation des collaborateurs aux bonnes pratiques d’hygiène informatique et sécurité des mots de passe.'
@@ -48,144 +48,111 @@ const roles = [
   }
 ];
 
-const formations = [
+const education = [
   {
-    dates: '2023 — 2025',
+    period: '2023 — 2025',
     title: 'Master Ingénieur en Systèmes, Réseaux et Cybersécurité',
-    institution: 'ESIPE / Université Gustave Eiffel · Vincennes, France',
-    badge: 'Niveau 7 (Bac+5)'
+    school: 'ESIPE / Université Gustave Eiffel · France',
+    level: 'Niveau 7 (Bac+5)'
   },
   {
-    dates: 'Février 2024',
+    period: 'Février 2024',
     title: 'Fortinet Certified Associate in Cybersecurity (FCA)',
-    institution: 'Fortinet Training Institute',
-    badge: 'Certification Officielle'
+    school: 'Fortinet Training Institute',
+    level: 'Certification'
   },
   {
-    dates: '2020 — 2021',
-    title: 'Licence Professionnelle Administrateur Systèmes et Réseaux',
-    institution: 'IUEs / INSAM · Douala, Cameroun',
-    badge: 'Bac+3'
+    period: '2020 — 2021',
+    title: 'Licence Pro Administrateur Systèmes et Réseaux',
+    school: 'IUEs / INSAM · Douala',
+    level: 'Bac+3'
   },
   {
-    dates: '2019 — 2020',
+    period: '2019 — 2020',
     title: 'BTS Réseaux et Sécurité',
-    institution: 'IUEs / INSAM · Bafoussam, Cameroun',
-    badge: 'Bac+2'
+    school: 'IUEs / INSAM · Bafoussam',
+    level: 'Bac+2'
   }
 ];
 
-const skillMatrix = [
-  {
-    category: 'Réseaux & Routage',
-    desc: 'TCP/IP, LAN, WAN, VLAN 802.1Q, NAT, ACL, QoS, OSPF, BGP, VPN IPsec/OpenVPN, MPLS, commutateurs Cisco, FortiGate, pfSense.'
-  },
-  {
-    category: 'Systèmes & Annuaires',
-    desc: 'Windows Server (2019-2025), Debian, Ubuntu Server, Red Hat, Active Directory DS, DNS, DHCP, GPO, DFS, iSCSI, Samba.'
-  },
-  {
-    category: 'Cybersécurité & Détection',
-    desc: 'Wazuh SIEM/XDR, Splunk Enterprise, ELK, Wireshark, Nmap, durcissement CIS Benchmarks, MFA, segmentation réseau, Burp Suite.'
-  },
-  {
-    category: 'Virtualisation & PRA/PCA',
-    desc: 'VMware vSphere (ESXi, vCenter, vDS, HA, DRS), Proxmox VE, Hyper-V, Veeam Backup & Replication, VTL Quadstor, rétention PBS.'
-  },
-  {
-    category: 'Supervision & Exploitation',
-    desc: 'Centreon, Zabbix, Nagios, SNMP v2c/v3, GLPI (ITIL), gestion des changements, reporting et documentation technique d’architecture.'
-  },
-  {
-    category: 'Automatisation & Scripts',
-    desc: 'Bash, PowerShell, Python, Cloud-init, API REST Proxmox/Fortinet, industrialisation des déploiements et audits de conformité.'
-  }
+const skillPillars = [
+  { name: 'Réseaux & Routage', items: 'TCP/IP, VLAN 802.1Q, OSPF, BGP, NAT, ACL, QoS, VPN IPsec/OpenVPN, Cisco, FortiGate, pfSense' },
+  { name: 'Systèmes & Annuaires', items: 'Windows Server (2019-2025), Debian, Ubuntu Server, Active Directory DS, GPO, DNS, DHCP, DFS, Samba' },
+  { name: 'Cybersécurité', items: 'Wazuh SIEM/XDR, Splunk Enterprise, Wireshark, Nmap, durcissement CIS, MFA, segmentation, Burp Suite' },
+  { name: 'Virtualisation & PRA', items: 'VMware vSphere (ESXi, vCenter, HA, DRS), Proxmox VE, Hyper-V, Veeam Backup & Replication, PBS' },
+  { name: 'Supervision & ITSM', items: 'Centreon, Zabbix, Nagios, SNMP v2c/v3, GLPI, gestion des changements et documentation technique' },
+  { name: 'Scripting & Automatisation', items: 'Bash, PowerShell, Python, Cloud-init, APIs REST Proxmox et Fortinet' }
 ];
 ---
-<BaseLayout title="Expérience & Compétences — Axel KAMGAING KOM" description="Parcours professionnel d'administrateur réseaux et systèmes, certifications et maîtrise technique.">
-  <!-- Hero Section -->
-  <header class="page-hero shell">
-    <div class="eyebrow-pill">
-      <span>PARCOURS & COMPÉTENCES</span>
-    </div>
-    <h1 class="headline-apple">Du terrain, des services<br/>et une méthode.</h1>
-    <p class="lead-apple">
-      Un parcours opérationnel en support et administration réseau/système, prolongé par une spécialisation d'ingénieur en cybersécurité des infrastructures.
-    </p>
-  </header>
+<BaseLayout title="Expérience & Parcours — Axel KAMGAING KOM" description="Parcours professionnel et compétences techniques d'Axel KAMGAING KOM">
+  <div class="shell">
+    <header class="hero-block">
+      <span class="section-label">Parcours & Compétences</span>
+      <h1 class="hero-headline">Expérience & Formation</h1>
+      <p class="hero-lead">
+        Un parcours opérationnel en support et administration réseau/système, prolongé par une spécialisation d'ingénieur en cybersécurité des infrastructures.
+      </p>
+    </header>
 
-  <!-- Section 01 : Expériences professionnelles -->
-  <section class="section-apple shell">
-    <div class="section-title-wrap">
-      <span class="section-eyebrow">01 / PARCOURS OPÉRATIONNEL</span>
-      <h2 class="section-title">Expériences professionnelles</h2>
-    </div>
-
-    <div class="cards-stack">
-      {roles.map((item) => (
-        <article class="experience-card">
-          <div class="exp-top-row">
-            <div class="exp-heading">
-              <h3 class="exp-role">{item.role}</h3>
-              <div class="exp-company-badge">
-                <span class="company-name">{item.org}</span>
-                <span class="badge-sep">·</span>
-                <span class="contract-type">{item.type}</span>
+    <!-- Expériences professionnelles -->
+    <section class="page-section">
+      <span class="section-label">01 / Postes occupés</span>
+      <h2 class="section-heading">Expériences professionnelles</h2>
+      
+      <div>
+        {roles.map(r => (
+          <article class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-title">{r.role}</h3>
+                <div style="margin-top: 3px;">
+                  <span class="exp-company">{r.org}</span>
+                  <span style="color: var(--text-muted); margin: 0 6px;">·</span>
+                  <span style="color: var(--text-muted); font-size: 0.9rem;">{r.context}</span>
+                </div>
               </div>
+              <span class="exp-period">{r.dates}</span>
             </div>
-            <span class="exp-period">{item.dates}</span>
-          </div>
-          <ul class="exp-missions-list">
-            {item.points.map((p) => (
-              <li>{p}</li>
-            ))}
-          </ul>
-        </article>
-      ))}
-    </div>
-  </section>
+            <ul class="exp-list">
+              {r.missions.map(m => (
+                <li>{m}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
 
-  <!-- Section 02 : Formations & Certifications -->
-  <section class="section-apple shell">
-    <div class="section-title-wrap">
-      <span class="section-eyebrow">02 / FORMATION & CERTIFICATIONS</span>
-      <h2 class="section-title">Diplômes et accréditations</h2>
-    </div>
-
-    <div class="bento-grid">
-      {formations.map((f) => (
-        <div class="bento-card col-6">
-          <div>
-            <span class="bento-badge">{f.dates}</span>
-            <h3 class="bento-title" style="font-size: 1.25rem;">{f.title}</h3>
-            <p class="bento-desc" style="margin-bottom: 0.8rem;">{f.institution}</p>
+    <!-- Diplômes et certifications -->
+    <section class="page-section">
+      <span class="section-label">02 / Formation académique</span>
+      <h2 class="section-heading">Diplômes & Certifications</h2>
+      <div class="grid-2">
+        {education.map(e => (
+          <div class="jp-card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="mono" style="font-size: 0.85rem; color: var(--text-muted);">{e.period}</span>
+              <span class="jp-tag jp-tag-accent">{e.level}</span>
+            </div>
+            <h3 style="font-size: 1.15rem; margin-bottom: 6px;">{e.title}</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">{e.school}</p>
           </div>
-          <div>
-            <span class="pill-tag" style="color: var(--apple-blue); border-color: rgba(41, 151, 255, 0.3);">{f.badge}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
+        ))}
+      </div>
+    </section>
 
-  <!-- Section 03 : Matrice de compétences -->
-  <section class="section-apple shell">
-    <div class="section-title-wrap">
-      <span class="section-eyebrow">03 / MATRICE TECHNIQUE</span>
-      <h2 class="section-title">Une lecture transversale du système</h2>
-      <p class="section-lead">Les compétences sont articulées par pôle pour refléter la complémentarité réseau, identité, observabilité et résilience.</p>
-    </div>
-
-    <div class="bento-grid">
-      {skillMatrix.map((s) => (
-        <div class="bento-card col-4">
-          <div>
-            <span class="bento-badge">COMPÉTENCE CLÉ</span>
-            <h3 class="bento-title" style="font-size: 1.18rem;">{s.category}</h3>
-            <p class="bento-desc" style="font-size: 0.92rem;">{s.desc}</p>
+    <!-- Compétences techniques -->
+    <section class="page-section">
+      <span class="section-label">03 / Matrice technique</span>
+      <h2 class="section-heading">Compétences clés</h2>
+      <div class="grid-3">
+        {skillPillars.map(p => (
+          <div class="jp-card">
+            <h3 style="font-size: 1.05rem; margin-bottom: 10px; color: var(--accent);">{p.name}</h3>
+            <p style="color: var(--text); font-size: 0.9rem; line-height: 1.55;">{p.items}</p>
           </div>
-        </div>
-      ))}
-    </div>
-  </section>
+        ))}
+      </div>
+    </section>
+  </div>
 </BaseLayout>
