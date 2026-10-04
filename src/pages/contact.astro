@@ -14,7 +14,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section class="page-section">
       <div class="grid-2">
         <div class="jp-card">
-          <span class="section-label">Coordonnées directes</span>
+          <span class="section-label">Formulaire direct</span>
+          <h2 style="font-size: 1.25rem; margin-bottom: 16px;">Envoyez-moi un message</h2>
+          <form id="contactForm" action="https://formspree.io/f/xovdokao" method="POST" style="display: flex; flex-direction: column; gap: 14px;">
+            <div>
+              <label for="name" style="display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px;">Votre nom</label>
+              <input type="text" id="name" name="name" placeholder="Votre nom complet" required style="width: 100%; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text);" />
+            </div>
+            <div>
+              <label for="email" style="display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px;">Votre email</label>
+              <input type="email" id="email" name="email" placeholder="nom@exemple.com" required style="width: 100%; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text);" />
+            </div>
+            <div>
+              <label for="message" style="display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px;">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Votre message ou proposition..." required style="width: 100%; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); resize: vertical;"></textarea>
+            </div>
+            <button type="submit" class="jp-btn jp-btn-primary" style="justify-content: center; margin-top: 4px;">Envoyer le message →</button>
+          </form>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div class="jp-card">
+            <span class="section-label">Coordonnées directes</span>
           <h2 style="font-size: 1.25rem; margin-bottom: 16px;">Pour me joindre</h2>
           <ul style="display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem;">
             <li>
@@ -55,6 +76,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </a>
             </li>
           </ul>
+        </div>
         </div>
       </div>
     </section>
