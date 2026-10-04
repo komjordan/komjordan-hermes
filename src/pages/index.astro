@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { projects } from '../data/projects';
+import { projects, type Project } from '../data/projects';
 
 const pWazuh = projects.find(p => p.slug === 'wazuh')!;
 const pAd = projects.find(p => p.slug === 'active-directory-gpo')!;
 const pSplunk = projects.find(p => p.slug === 'splunk')!;
 const pVsphere = projects.find(p => p.slug === 'vsphere')!;
-const featured = [pWazuh, pAd, pSplunk, pVsphere];
+const featured: Project[] = [pWazuh, pAd, pSplunk, pVsphere];
 ---
 <BaseLayout title="Axel KAMGAING KOM — Ingénieur Systèmes, Réseaux & Cybersécurité">
   <div class="shell">
@@ -32,7 +32,7 @@ const featured = [pWazuh, pAd, pSplunk, pVsphere];
       </div>
     </section>
 
-    <!-- Compétences clés -->
+    <!-- Pôles techniques -->
     <section class="page-section">
       <span class="section-label">Pôles techniques</span>
       <h2 class="section-heading">Domaines d'intervention</h2>
@@ -74,7 +74,7 @@ const featured = [pWazuh, pAd, pSplunk, pVsphere];
       </div>
 
       <div class="grid-2">
-        {featured.map(project => (
+        {featured.map((project: Project) => (
           <article class="project-item">
             <div>
               <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
@@ -84,9 +84,9 @@ const featured = [pWazuh, pAd, pSplunk, pVsphere];
               <h3 class="project-title">
                 <a href={`/projets/${project.slug}/`}>{project.title}</a>
               </h3>
-              <p class="project-desc">{project.description}</p>
+              <p class="project-desc">{project.excerpt}</p>
               <div class="project-tags">
-                {project.stack.slice(0, 4).map(st => (
+                {project.stack.slice(0, 4).map((st: string) => (
                   <span class="jp-tag">{st}</span>
                 ))}
               </div>

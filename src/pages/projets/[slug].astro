@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectDiagram from '../../components/ProjectDiagram.astro';
-import { projects, type Project } from '../../data/projects';
+import { projects, type Project, type ProjectStep } from '../../data/projects';
 
 export function getStaticPaths() {
-  return projects.map((project) => ({
+  return projects.map((project: Project) => ({
     params: { slug: project.slug },
     props: { project },
   }));
@@ -14,13 +14,13 @@ interface Props {
   project: Project;
 }
 
-const { project } = Astro.props;
+const { project } = Astro.props as Props;
 const date = new Date(project.date).toLocaleDateString('fr-FR', {
   year: 'numeric',
   month: 'long',
 });
 ---
-<BaseLayout title={`${project.title} — Axel KAMGAING KOM`} description={project.description}>
+<BaseLayout title={`${project.title} — Axel KAMGAING KOM`} description={project.excerpt}>
   <div class="shell">
     <article style="padding: 36px 0 60px;">
       <nav style="margin-bottom: 24px;">
@@ -32,9 +32,10 @@ const date = new Date(project.date).toLocaleDateString('fr-FR', {
         <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 12px;">
           <span class="jp-tag jp-tag-accent">{project.category}</span>
           <span class="mono" style="color: var(--text-muted); font-size: 0.85rem;">{date}</span>
+          <span class="mono" style="color: var(--text-muted); font-size: 0.85rem; margin-left: 8px;">{project.readingTime} de lecture</span>
         </div>
         <h1 class="hero-headline" style="margin-bottom: 16px;">{project.title}</h1>
-        <p class="hero-lead">{project.description}</p>
+        <p class="hero-lead">{project.excerpt}</p>
       </header>
 
       <!-- Bloc Terminal / Métadonnées -->
@@ -47,11 +48,11 @@ const date = new Date(project.date).toLocaleDateString('fr-FR', {
         </div>
         <p class="jp-prompt"># Environnement & Outils</p>
         <div style="display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 16px;">
-          {project.stack.map((t) => <span class="jp-tag">{t}</span>)}
+          {project.stack.map((t: string) => <span class="jp-tag">{t}</span>)}
         </div>
         <p class="jp-prompt"># Objectifs clés</p>
         <ul style="margin-left: 18px; list-style: disc; color: var(--terminal-text); font-size: 0.92rem; line-height: 1.6;">
-          {project.highlights.map((h) => <li>{h}</li>)}
+          {project.objectives.map((h: string) => <li>{h}</li>)}
         </ul>
       </div>
 
@@ -65,22 +66,22 @@ const date = new Date(project.date).toLocaleDateString('fr-FR', {
 
       <!-- Étapes et contenu technique exhaustif -->
       <div style="display: flex; flex-direction: column; gap: 32px; margin-top: 36px;">
-        {project.steps.map((step, idx) => (
+        {project.steps.map((step: ProjectStep, idx: number) => (
           <section class="jp-card">
             <span class="mono" style="color: var(--accent); font-size: 0.85rem; text-transform: uppercase;">
               Étape {String(idx + 1).padStart(2, '0')}
             </span>
             <h2 style="font-size: 1.35rem; margin: 8px 0 14px;">{step.title}</h2>
             
-            {step.description && (
+            {step.summary && (
               <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
-                {step.description}
+                {step.summary}
               </p>
             )}
 
             {step.points && step.points.length > 0 && (
               <ul style="margin-left: 20px; list-style: disc; margin-bottom: 18px; color: var(--text); font-size: 0.93rem;">
-                {step.points.map((pt) => <li style="margin-bottom: 6px;">{pt}</li>)}
+                {step.points.map((pt: string) => <li style="margin-bottom: 6px;">{pt}</li>)}
               </ul>
             )}
 
@@ -90,6 +91,13 @@ const date = new Date(project.date).toLocaleDateString('fr-FR', {
                   <span class="mono" style="color: var(--text-muted); font-size: 0.8rem;">Terminal / Configuration</span>
                 </div>
                 <pre><code>{step.code}</code></pre>
+              </div>
+            )}
+
+            {step.verification && (
+              <div style="margin-top: 14px; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
+                <span class="mono" style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase;">Vérification opérationnelle</span>
+                <p style="color: var(--text); font-size: 0.9rem; margin-top: 4px; font-family: var(--mono);">{step.verification}</p>
               </div>
             )}
           </section>

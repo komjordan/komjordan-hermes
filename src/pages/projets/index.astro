@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { categories, projects } from '../../data/projects';
+import { projects, type Project } from '../../data/projects';
 ---
 <BaseLayout title="Projets & Réalisations — Axel KAMGAING KOM" description="Études de cas d'ingénierie systèmes, réseaux et cybersécurité">
   <div class="shell">
@@ -14,7 +14,7 @@ import { categories, projects } from '../../data/projects';
 
     <section class="page-section">
       <div class="grid-2">
-        {projects.map(project => (
+        {projects.map((project: Project) => (
           <article class="project-item">
             <div>
               <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
@@ -24,9 +24,9 @@ import { categories, projects } from '../../data/projects';
               <h2 class="project-title">
                 <a href={`/projets/${project.slug}/`}>{project.title}</a>
               </h2>
-              <p class="project-desc">{project.description}</p>
+              <p class="project-desc">{project.excerpt}</p>
               <div class="project-tags">
-                {project.stack.map(st => (
+                {project.stack.map((st: string) => (
                   <span class="jp-tag">{st}</span>
                 ))}
               </div>
