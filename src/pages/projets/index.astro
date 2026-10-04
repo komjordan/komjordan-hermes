@@ -1,43 +1,50 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { projects, type Project } from '../../data/projects';
----
-<BaseLayout title="Projets & Réalisations — Axel KAMGAING KOM" description="Études de cas d'ingénierie systèmes, réseaux et cybersécurité">
-  <div class="shell">
-    <header class="hero-block">
-      <span class="section-label">Réalisations & Audits</span>
-      <h1 class="hero-headline">Projets d'ingénierie</h1>
-      <p class="hero-lead">
-        Dossiers techniques complets : architectures déployées, prérequis, commandes de configuration réelles et protocoles de durcissement.
-      </p>
-    </header>
 
-    <section class="page-section">
-      <div class="grid-2">
-        {projects.map((project: Project) => (
-          <article class="project-item">
-            <div>
-              <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span class="jp-tag">{project.category}</span>
-                <span class="mono" style="font-size: 0.82rem; color: var(--text-muted);">{project.date}</span>
-              </div>
-              <h2 class="project-title">
-                <a href={`/projets/${project.slug}/`}>{project.title}</a>
-              </h2>
-              <p class="project-desc">{project.excerpt}</p>
-              <div class="project-tags">
-                {project.stack.map((st: string) => (
-                  <span class="jp-tag">{st}</span>
-                ))}
-              </div>
-            </div>
-            <div class="project-footer">
-              <span style="color: var(--text-muted); font-size: 0.84rem;">{project.steps.length} sections techniques</span>
-              <a href={`/projets/${project.slug}/`}>Consulter le dossier →</a>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  </div>
+const categories = ['Tous', 'Cybersécurité', 'Systèmes', 'Réseaux', 'Sauvegarde', 'ITSM'];
+---
+<BaseLayout
+  title="Projets & Laboratoires Techniques — Axel KAMGAING KOM"
+  description="Ensemble des 7 dossiers d'ingénierie et études de cas réelles menés par Axel KAMGAING KOM."
+>
+  <header class="shell page-header-soft">
+    <div class="hero-badge-pill">
+      <span>DOCUMENTATION TECHNIQUE & RECHERCHE</span>
+    </div>
+    <h1 class="page-title-soft">Projets d'Ingénierie & Laboratoires</h1>
+    <p class="page-desc-soft">
+      Chaque dossier détaille l'architecture déployée, les configurations appliquées, la topologie et la validation des tests de sécurité et de continuité.
+    </p>
+  </header>
+
+  <main class="shell section-soft">
+    <div class="projects-grid-soft">
+      {projects.map((project: Project) => (
+        <article class="project-card-soft" data-category={project.category}>
+          <div class="project-card-header">
+            <span class="category-tag-soft">{project.category}</span>
+            <span class="status-pill-soft">{project.status}</span>
+          </div>
+          <h2 class="project-title-soft">
+            <a href={`/projets/${project.slug}/`}>{project.title}</a>
+          </h2>
+          <p class="project-summary-soft">{project.summary}</p>
+          
+          <div class="project-stack-wrap">
+            {project.stack.map((tech: string) => (
+              <span class="tech-chip">{tech}</span>
+            ))}
+          </div>
+
+          <div class="project-card-footer">
+            <span class="sections-count">{project.sections.length} phases documentées</span>
+            <a href={`/projets/${project.slug}/`} class="read-more-link">
+              Lire l'étude <span>→</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </main>
 </BaseLayout>

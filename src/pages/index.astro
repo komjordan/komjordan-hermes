@@ -2,102 +2,117 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { projects, type Project } from '../data/projects';
 
-const pWazuh = projects.find(p => p.slug === 'wazuh')!;
-const pAd = projects.find(p => p.slug === 'active-directory-gpo')!;
-const pSplunk = projects.find(p => p.slug === 'splunk')!;
-const pVsphere = projects.find(p => p.slug === 'vsphere')!;
-const featured: Project[] = [pWazuh, pAd, pSplunk, pVsphere];
+const featured = projects.slice(0, 4);
 ---
-<BaseLayout title="Axel KAMGAING KOM — Ingénieur Systèmes, Réseaux & Cybersécurité">
-  <div class="shell">
-    <!-- Hero Terminal Box -->
-    <section class="hero-block">
-      <div class="jp-terminal">
-        <div class="jp-terminal-bar">
-          <span class="jp-dot red"></span>
-          <span class="jp-dot yellow"></span>
-          <span class="jp-dot green"></span>
-          <span class="jp-terminal-title">axel@infra: ~/profile</span>
-        </div>
-        <p class="jp-prompt">axel@infra:~$ cat whoami.txt</p>
-        <h1 class="hero-headline">Axel KAMGAING KOM</h1>
-        <p class="hero-lead">
-          Diplômé Master Ingénieur Systèmes, Réseaux & Cybersécurité (ESIPE). Passionné d'administration système (Linux, Windows Server), de durcissement d'infrastructure, de détection d'intrusions (SIEM) et de haute disponibilité.
-        </p>
-        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;">
-          <a href="/projets/" class="jp-btn jp-btn-primary">Consulter les projets</a>
-          <a href="/experience/" class="jp-btn jp-btn-secondary">Parcours & Compétences</a>
-          <a href="https://komiapply.komjordan.fr" target="_blank" rel="noreferrer" class="jp-btn jp-btn-secondary">Découvrir KomiApply ↗</a>
-        </div>
+<BaseLayout
+  title="Axel KAMGAING KOM — Ingénieur Systèmes, Réseaux & Cybersécurité"
+  description="Portfolio d'Axel KAMGAING KOM. Projets techniques documentés, infrastructures réelles, supervision et cybersécurité."
+>
+  <!-- Hero Section : Sobre, soft, inspiré de komiapply et du profil d'origine -->
+  <section class="shell hero-soft">
+    <div class="hero-badge-pill">
+      <span class="status-dot-active"></span>
+      <span>Disponible pour opportunités · Région parisienne & Mobilité</span>
+    </div>
+    
+    <h1 class="hero-title">
+      Axel KAMGAING KOM<br />
+      <span class="hero-subtitle-dim">Ingénierie Systèmes, Réseaux & Cybersécurité</span>
+    </h1>
+    
+    <p class="hero-bio-soft">
+      Jeune diplômé en Master Systèmes, Réseaux et Cybersécurité (ESIPE / Université Gustave Eiffel). 
+      Passionné par l'architecture des infrastructures, le durcissement des annuaires, la détection d'incidents (SIEM/SOC) et la résilience opérationnelle.
+    </p>
+
+    <div class="hero-actions-group">
+      <a href="/projets/" class="btn-soft-primary">
+        Explorer les projets documentés
+        <span class="btn-arrow">→</span>
+      </a>
+      <a href="/experience/" class="btn-soft-secondary">
+        Consulter le parcours
+      </a>
+      <a href="/contact/" class="btn-soft-outline">
+        Me contacter
+      </a>
+    </div>
+
+    <!-- Terminal Quick-Card / Whoami inspiré du portfolio d'origine -->
+    <div class="terminal-card-soft">
+      <div class="terminal-bar">
+        <span class="t-dot t-red"></span>
+        <span class="t-dot t-yellow"></span>
+        <span class="t-dot t-green"></span>
+        <span class="terminal-title-text">axel@infra-lab: ~ (whoami)</span>
       </div>
-    </section>
-
-    <!-- Pôles techniques -->
-    <section class="page-section">
-      <span class="section-label">Pôles techniques</span>
-      <h2 class="section-heading">Domaines d'intervention</h2>
-      <div class="grid-3">
-        <div class="jp-card">
-          <span class="jp-tag jp-tag-accent" style="margin-bottom: 12px;">Sécurité & SIEM</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Supervision & Détection</h3>
-          <p style="color: var(--text-muted); font-size: 0.92rem;">
-            Déploiement Wazuh SIEM/XDR, Splunk Enterprise, analyse des journaux de sécurité, règles de détection et remédiation active.
-          </p>
-        </div>
-
-        <div class="jp-card">
-          <span class="jp-tag jp-tag-accent" style="margin-bottom: 12px;">Infrastructures</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Systèmes & Annuaires</h3>
-          <p style="color: var(--text-muted); font-size: 0.92rem;">
-            Administration Active Directory DS, GPO de durcissement (CIS Benchmarks), serveurs Debian/Ubuntu, DNS, DHCP, MFA.
-          </p>
-        </div>
-
-        <div class="jp-card">
-          <span class="jp-tag jp-tag-accent" style="margin-bottom: 12px;">Résilience</span>
-          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Virtualisation & PRA</h3>
-          <p style="color: var(--text-muted); font-size: 0.92rem;">
-            Clusters VMware vSphere, Proxmox VE, plans de sauvegarde Veeam Backup & Replication et Proxmox Backup Server (PBS).
-          </p>
-        </div>
+      <div class="terminal-body-code">
+        <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cmd">whoami --verbose</span></div>
+        <div class="terminal-out">Axel KAMGAING KOM · Ingénieur Cybersécurité & Systèmes (FCA Fortinet)</div>
+        <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cmd">cat /etc/core-skills</span></div>
+        <div class="terminal-out t-skills">Active Directory (AD DS/GPO) · Wazuh SIEM · Splunk · VMware vSphere · Proxmox VE · Veeam PRA · Cisco OSPF/VLAN · Fortinet</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Projets en avant -->
-    <section class="page-section">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
-        <div>
-          <span class="section-label">Études de cas réelles</span>
-          <h2 class="section-heading" style="margin-bottom: 0;">Projets d'ingénierie récents</h2>
-        </div>
-        <a href="/projets/" style="color: var(--accent); font-weight: 500; font-size: 0.95rem;">Tous les projets ({projects.length}) →</a>
+  <!-- Section Projets phares -->
+  <section class="shell section-soft">
+    <div class="section-header-row">
+      <div>
+        <h2 class="section-heading-soft">Dossiers d'Ingénierie & Preuves Techniques</h2>
+        <p class="section-desc-soft">7 laboratoires documentés de bout en bout avec architectures, configurations et tests.</p>
       </div>
+      <a href="/projets/" class="view-all-link">Tous les projets ({projects.length}) →</a>
+    </div>
 
-      <div class="grid-2">
-        {featured.map((project: Project) => (
-          <article class="project-item">
-            <div>
-              <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span class="jp-tag">{project.category}</span>
-                <span class="mono" style="font-size: 0.82rem; color: var(--text-muted);">{project.date}</span>
-              </div>
-              <h3 class="project-title">
-                <a href={`/projets/${project.slug}/`}>{project.title}</a>
-              </h3>
-              <p class="project-desc">{project.excerpt}</p>
-              <div class="project-tags">
-                {project.stack.slice(0, 4).map((st: string) => (
-                  <span class="jp-tag">{st}</span>
-                ))}
-              </div>
-            </div>
-            <div class="project-footer">
-              <span style="color: var(--text-muted); font-size: 0.84rem;">{project.steps.length} sections techniques</span>
-              <a href={`/projets/${project.slug}/`}>Consulter l'étude →</a>
-            </div>
-          </article>
-        ))}
+    <div class="projects-grid-soft">
+      {featured.map((project: Project) => (
+        <article class="project-card-soft">
+          <div class="project-card-header">
+            <span class="category-tag-soft">{project.category}</span>
+            <span class="date-tag-soft">{project.date}</span>
+          </div>
+          <h3 class="project-title-soft">
+            <a href={`/projets/${project.slug}/`}>{project.title}</a>
+          </h3>
+          <p class="project-summary-soft">{project.summary}</p>
+          
+          <div class="project-stack-wrap">
+            {project.stack.slice(0, 4).map((tech: string) => (
+              <span class="tech-chip">{tech}</span>
+            ))}
+          </div>
+
+          <div class="project-card-footer">
+            <span class="sections-count">{project.sections.length} sections techniques</span>
+            <a href={`/projets/${project.slug}/`} class="read-more-link">
+              Consulter le dossier <span>→</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section Chiffres & Atouts -->
+  <section class="shell section-soft">
+    <div class="stats-grid-soft">
+      <div class="stat-box-soft">
+        <span class="stat-number">Bac+5</span>
+        <span class="stat-label">Master Ingénieur Réseaux & Sécurité (ESIPE)</span>
       </div>
-    </section>
-  </div>
+      <div class="stat-box-soft">
+        <span class="stat-number">FCA</span>
+        <span class="stat-label">Fortinet Certified Associate in Cybersecurity</span>
+      </div>
+      <div class="stat-box-soft">
+        <span class="stat-number">7</span>
+        <span class="stat-label">Laboratoires d'infrastructures & PRA complets</span>
+      </div>
+      <div class="stat-box-soft">
+        <span class="stat-number">3+ ans</span>
+        <span class="stat-label">Expérience pratique en support & administration</span>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
