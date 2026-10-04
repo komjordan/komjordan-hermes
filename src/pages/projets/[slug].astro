@@ -2,42 +2,98 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectDiagram from '../../components/ProjectDiagram.astro';
 import { projects, type Project } from '../../data/projects';
-export function getStaticPaths() { return projects.map((project) => ({ params: { slug: project.slug }, props: { project } })); }
-interface Props { project: Project; }
+import fullArticles from '../../data/fullArticles.json';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
 const { project } = Astro.props;
 const index = projects.findIndex((item) => item.slug === project.slug);
 const next = projects[(index + 1) % projects.length];
+const prev = projects[(index - 1 + projects.length) % projects.length];
 const date = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long' }).format(new Date(project.date));
+
+const fullHtml = (fullArticles as Record<string, string>)[project.slug] || '';
+
 const articleSchema = {
-  '@context': 'https://schema.org', '@type': 'Article', headline: project.title, description: project.summary,
-  datePublished: project.date, inLanguage: 'fr-FR', author: { '@type': 'Person', name: 'Axel KAMGAING KOM' },
-  mainEntityOfPage: `https://komjordan.fr/projets/${project.slug}/`, image: 'https://komjordan.fr/og-default.svg'
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: project.title,
+  description: project.summary,
+  datePublished: project.date,
+  inLanguage: 'fr-FR',
+  author: { '@type': 'Person', name: 'Axel KAMGAING KOM' },
+  mainEntityOfPage: `https://komjordan.fr/projets/${project.slug}/`,
+  image: 'https://komjordan.fr/og-default.svg'
 };
 ---
 <BaseLayout title={`${project.title} — Axel KAMGAING KOM`} description={project.summary} type="article">
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
-  <article>
+  
+  <article class="project-case-study">
+    <!-- Hero Apple-style -->
     <header class="project-hero shell">
-      <p class="eyebrow">Projet / {project.category}</p>
-      <h1>{project.title}</h1>
-      <p class="lede">{project.intro}</p>
-      <div class="project-facts"><span class="tag">{project.status}</span><time class="tag" datetime={project.date}>{date}</time>{project.stack.map((tool) => <span class="tag">{tool}</span>)}</div>
-    </header>
-    <div class="shell"><ProjectDiagram nodes={project.diagram.nodes} links={project.diagram.links} label={`Architecture simplifiée — ${project.shortTitle}`} /></div>
-    <div class="shell article-sections">
-      {project.sections.map((section, index) => (
-        <section id={`section-${index + 1}`}>
-          <div class="article-section-body">
-            <div><p class="eyebrow">0{index + 1}</p><h2>{section.title}</h2></div>
-            <div class="article-copy">
-              {section.body.map((paragraph) => <p>{paragraph}</p>)}
-              {section.points && <ul>{section.points.map((point) => <li>{point}</li>)}</ul>}
-              {section.code && <pre><code>{section.code}</code></pre>}
-            </div>
+      <div class="hero-eyebrow">
+        <a href="/projets/" class="back-link">← Tous les projets</a>
+        <span class="category-badge">{project.category}</span>
+      </div>
+      <h1 class="project-headline">{project.title}</h1>
+      <p class="project-lead">{project.summary}</p>
+      
+      <div class="project-meta-strip">
+        <div class="meta-item">
+          <span class="meta-label">Statut</span>
+          <span class="meta-val status-val">{project.status}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Date</span>
+          <time class="meta-val" datetime={project.date}>{date}</time>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Environnement & Outils</span>
+          <div class="meta-tags">
+            {project.stack.map((t) => <span class="pill-tag">{t}</span>)}
           </div>
-        </section>
-      ))}
-      <nav class="project-next" aria-label="Projet suivant"><span><small class="mono">Projet suivant</small><br/><a class="text-link" href={`/projets/${next.slug}/`}>{next.shortTitle} →</a></span><a href="/projets/">Tous les projets</a></nav>
-    </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Architecture Diagram Canvas -->
+    <section class="shell diagram-container">
+      <div class="diagram-card">
+        <div class="diagram-header">
+          <span class="mono-label">TOPOLOGIE TECHNIQUE</span>
+          <span class="pulse-dot"></span>
+        </div>
+        <ProjectDiagram nodes={project.diagram.nodes} links={project.diagram.links} label={`Topologie — ${project.shortTitle}`} />
+      </div>
+    </section>
+
+    <!-- Technical Exhaustive Body -->
+    <main class="shell technical-content-wrapper">
+      <div class="full-article-body" set:html={fullHtml} />
+    </main>
+
+    <!-- Next / Previous Navigation -->
+    <footer class="shell project-pagination">
+      <div class="pagination-grid">
+        <a class="pagination-card prev" href={`/projets/${prev.slug}/`}>
+          <span class="nav-direction">← Projet précédent</span>
+          <strong class="nav-title">{prev.shortTitle}</strong>
+        </a>
+        <a class="pagination-card next" href={`/projets/${next.slug}/`}>
+          <span class="nav-direction">Projet suivant →</span>
+          <strong class="nav-title">{next.shortTitle}</strong>
+        </a>
+      </div>
+    </footer>
   </article>
 </BaseLayout>

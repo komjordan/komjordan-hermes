@@ -1,19 +1,58 @@
 ---
-interface Props { nodes: string[]; links: [number, number][]; label?: string; }
-const { nodes, links, label = 'Schéma d’architecture du projet' } = Astro.props;
-const positions = nodes.map((_, index) => {
-  const columns = nodes.length > 4 ? 3 : 2;
-  const row = Math.floor(index / columns);
-  const col = index % columns;
-  return { x: 36 + col * (columns === 3 ? 31 : 52), y: 25 + row * 42 };
+interface Props {
+  nodes: string[];
+  links: [number, number][];
+  label?: string;
+}
+const { nodes, links, label = 'Topologie technique' } = Astro.props;
+const total = nodes.length;
+const positions = nodes.map((_, i) => {
+  const angle = (i / total) * 2 * Math.PI - Math.PI / 2;
+  const rx = 40;
+  const ry = 30;
+  return {
+    x: 50 + rx * Math.cos(angle),
+    y: 50 + ry * Math.sin(angle)
+  };
 });
 ---
-<figure class="architecture" aria-label={label}>
-  <svg viewBox="0 0 100 100" role="img" aria-labelledby="diagram-title" preserveAspectRatio="xMidYMid meet">
-    <title id="diagram-title">{label}</title>
-    <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" /></marker></defs>
-    {links.map(([a,b]) => <line x1={positions[a].x} y1={positions[a].y} x2={positions[b].x} y2={positions[b].y} marker-end="url(#arrow)" />)}
-    {nodes.map((node,index) => <g><rect x={positions[index].x-14} y={positions[index].y-7} width="28" height="14" rx="1"/><text x={positions[index].x} y={positions[index].y+1}>{node}</text></g>)}
+<figure class="topology-canvas-wrap" aria-label={label}>
+  <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" class="topology-svg">
+    <defs>
+      <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="var(--apple-blue)" stop-opacity="0.7" />
+        <stop offset="100%" stop-color="var(--apple-blue)" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    {links.map(([from, to]) => {
+      const p1 = positions[from];
+      const p2 = positions[to];
+      if (!p1 || !p2) return null;
+      return <line x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke="url(#lineGrad)" stroke-width="0.8" stroke-dasharray="2 1.5" />;
+    })}
+    {positions.map((p, i) => (
+      <g class="topology-node">
+        <circle cx={p.x} cy={p.y} r="3.2" fill="var(--surface)" stroke="var(--apple-blue)" stroke-width="1" />
+        <circle cx={p.x} cy={p.y} r="1.2" fill="var(--apple-blue)" />
+        <text x={p.x} y={p.y > 50 ? p.y + 6 : p.y - 4.5} text-anchor="middle" fill="var(--text)" font-size="2.8" font-family="var(--sans)" font-weight="500">
+          {nodes[i]}
+        </text>
+      </g>
+    ))}
   </svg>
-  <figcaption>Architecture simplifiée — représentation originale, non contractuelle.</figcaption>
 </figure>
+<style>
+  .topology-canvas-wrap {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .topology-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .topology-node text {
+    user-select: none;
+  }
+</style>

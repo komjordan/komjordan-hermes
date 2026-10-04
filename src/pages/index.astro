@@ -1,61 +1,99 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { projects } from '../data/projects';
-const featured = projects.slice(0, 4);
+
+const pWazuh = projects.find(p => p.slug === 'wazuh')!;
+const pAd = projects.find(p => p.slug === 'active-directory-gpo')!;
+const pSplunk = projects.find(p => p.slug === 'splunk')!;
+const pAudit = projects.find(p => p.slug === 'audit-securite')!;
+const pVeeam = projects.find(p => p.slug === 'veeam')!;
+const pVsphere = projects.find(p => p.slug === 'vsphere')!;
 ---
-<BaseLayout>
-  <section class="shell hero">
-    <div class="hero-copy">
-      <p class="eyebrow">Systèmes · Réseaux · Cybersécurité</p>
-      <h1 class="display">Observer.<br/><span class="accent">Comprendre.</span><br/>Sécuriser.</h1>
-      <p class="lede">Je suis Axel KAMGAING KOM, jeune diplômé en systèmes, réseaux et cybersécurité. Je documente ici des laboratoires où l’infrastructure, les journaux et les procédures deviennent lisibles.</p>
-      <div class="hero-actions">
-        <a class="button primary" href="/projets/">Explorer les projets <span aria-hidden="true">↗</span></a>
-        <a class="button" href="/experience/">Lire le parcours</a>
-      </div>
+<BaseLayout title="Axel KAMGAING KOM — Systèmes, Réseaux & Cybersécurité">
+  <!-- Apple Billboard Hero -->
+  <section class="shell hero-apple">
+    <div class="eyebrow-pill">
+      <span>INGÉNIERIE SYSTÈMES & CYBERSÉCURITÉ</span>
     </div>
-    <aside class="hero-side" aria-label="Périmètre technique">
-      <p class="status-line"><span class="status-dot"></span> Portfolio technique · France</p>
-      <ol class="scope-list">
-        <li><span>01</span>Détection & SIEM</li>
-        <li><span>02</span>Infrastructure système</li>
-        <li><span>03</span>Réseaux & segmentation</li>
-        <li><span>04</span>Sauvegarde & reprise</li>
-      </ol>
-    </aside>
-  </section>
-
-  <section class="section section-rule shell reveal">
-    <div class="section-head">
-      <div><p class="eyebrow">Dossiers récents</p><h2>La technique, avec ses preuves et ses limites.</h2></div>
-      <p class="lede">Chaque dossier part d’un objectif, expose l’architecture et distingue ce qui a été observé de ce qui reste à documenter.</p>
-    </div>
-    <div class="project-index">
-      {featured.map((project, index) => (
-        <a class="project-row" href={`/projets/${project.slug}/`}>
-          <span class="project-number">0{index + 1}</span>
-          <strong class="project-title">{project.shortTitle}</strong>
-          <span class="project-meta"><span>{project.category}</span><span>·</span><span>{project.status}</span></span>
-          <span class="project-arrow" aria-hidden="true">↗</span>
-        </a>
-      ))}
-    </div>
-    <p style="margin-top:2rem"><a class="text-link" href="/projets/">Voir les sept projets <span aria-hidden="true">→</span></a></p>
-  </section>
-
-  <section class="section shell reveal">
-    <div class="section-head"><div><p class="eyebrow">Méthode</p><h2>Décider avant de déployer.</h2></div></div>
-    <div class="principles">
-      <article class="principle"><span>01 / Cartographier</span><div><h3>Voir le système entier</h3><p>Identifier les dépendances, les flux et le périmètre avant d’agir.</p></div></article>
-      <article class="principle"><span>02 / Instrumenter</span><div><h3>Rendre les événements lisibles</h3><p>Collecter les journaux utiles et relier le signal à une action connue.</p></div></article>
-      <article class="principle"><span>03 / Vérifier</span><div><h3>Tester le retour attendu</h3><p>Valider une alerte, une politique ou une restauration dans un cadre contrôlé.</p></div></article>
+    <h1 class="headline-apple">
+      Concevoir. Sécuriser.<br/>Superviser avec rigueur.
+    </h1>
+    <p class="lead-apple">
+      Laboratoires d'infrastructures réelles, architectures résilientes et détection d'intrusions documentés en profondeur par Axel KAMGAING KOM.
+    </p>
+    <div class="hero-cta-group">
+      <a class="cta-primary" href="/projets/">Explorer les projets <span>↗</span></a>
+      <a class="cta-secondary" href="/experience/">Consulter le parcours</a>
     </div>
   </section>
 
-  <section class="section section-rule shell reveal">
-    <div class="section-head">
-      <div><p class="eyebrow">Trajectoire</p><h2>De l’assistance à l’ingénierie d’infrastructure.</h2></div>
-      <div><p class="lede">Un parcours construit entre support, réseau, administration système et sécurité, consolidé par un Master Ingénieur obtenu en 2025.</p><p style="margin-top:1.5rem"><a class="text-link" href="/a-propos/">Découvrir l’approche →</a></p></div>
+  <!-- Bento Grid Showcase (Apple style) -->
+  <section class="shell bento-section">
+    <div class="bento-head">
+      <h2>Dossiers d'Ingénierie & Preuves Techniques</h2>
+      <p>Études de cas réelles avec topologies, configurations et validation de tests.</p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Card 1: Wazuh (Col 8) -->
+      <article class="bento-card col-8">
+        <div>
+          <span class="bento-badge">{pWazuh.category} · SIEM & EDR</span>
+          <h3 class="bento-title">{pWazuh.title}</h3>
+          <p class="bento-desc">{pWazuh.summary}</p>
+        </div>
+        <a class="bento-link" href={`/projets/${pWazuh.slug}/`}>Consulter l'étude complète →</a>
+      </article>
+
+      <!-- Card 2: AD & GPO (Col 4) -->
+      <article class="bento-card col-4">
+        <div>
+          <span class="bento-badge">{pAd.category} · Identités</span>
+          <h3 class="bento-title">{pAd.title}</h3>
+          <p class="bento-desc">{pAd.summary}</p>
+        </div>
+        <a class="bento-link" href={`/projets/${pAd.slug}/`}>Consulter l'étude complète →</a>
+      </article>
+
+      <!-- Card 3: Splunk (Col 4) -->
+      <article class="bento-card col-4">
+        <div>
+          <span class="bento-badge">{pSplunk.category} · Supervision</span>
+          <h3 class="bento-title">{pSplunk.title}</h3>
+          <p class="bento-desc">{pSplunk.summary}</p>
+        </div>
+        <a class="bento-link" href={`/projets/${pSplunk.slug}/`}>Consulter l'étude complète →</a>
+      </article>
+
+      <!-- Card 4: Audit CEH (Col 4) -->
+      <article class="bento-card col-4">
+        <div>
+          <span class="bento-badge">{pAudit.category} · Sécurité Offensive</span>
+          <h3 class="bento-title">{pAudit.title}</h3>
+          <p class="bento-desc">{pAudit.summary}</p>
+        </div>
+        <a class="bento-link" href={`/projets/${pAudit.slug}/`}>Consulter l'étude complète →</a>
+      </article>
+
+      <!-- Card 5: Veeam (Col 4) -->
+      <article class="bento-card col-4">
+        <div>
+          <span class="bento-badge">{pVeeam.category} · PRA & PCA</span>
+          <h3 class="bento-title">{pVeeam.title}</h3>
+          <p class="bento-desc">{pVeeam.summary}</p>
+        </div>
+        <a class="bento-link" href={`/projets/${pVeeam.slug}/`}>Consulter l'étude complète →</a>
+      </article>
+
+      <!-- Card 6: vSphere Cluster (Col 12) -->
+      <article class="bento-card col-12">
+        <div>
+          <span class="bento-badge">{pVsphere.category} · Virtualisation Datacenter</span>
+          <h3 class="bento-title">{pVsphere.title}</h3>
+          <p class="bento-desc">{pVsphere.summary}</p>
+        </div>
+        <a class="bento-link" href={`/projets/${pVsphere.slug}/`}>Consulter l'étude complète →</a>
+      </article>
     </div>
   </section>
 </BaseLayout>
