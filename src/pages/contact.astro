@@ -1,22 +1,74 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Contact — Axel KAMGAING KOM" description="Contacter Axel KAMGAING KOM par email, LinkedIn ou via le formulaire sécurisé Formspree.">
-  <header class="page-hero shell"><p class="eyebrow">Contact</p><h1>Parlons infrastructure, sécurité ou prochaine mission.</h1><p class="lede">Un besoin, une question sur un projet ou une opportunité à partager ? Écrivez-moi directement.</p></header>
-  <section class="section section-rule shell contact-grid">
-    <div class="contact-direct">
-      <p class="eyebrow">Canaux directs</p>
-      <a href="mailto:axel@komjordan.fr">axel@komjordan.fr</a>
-      <a href="https://www.linkedin.com/in/komjordan" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-      <a href="https://github.com/komjordan" target="_blank" rel="noreferrer">GitHub ↗</a>
+<BaseLayout title="Contact — Axel KAMGAING KOM" description="Formulaire de contact direct et coordonnées professionnelles d'Axel KAMGAING KOM.">
+  <header class="page-hero shell">
+    <div class="eyebrow-pill">
+      <span>COMMUNICATION</span>
     </div>
-    <form class="contact-form" action="https://formspree.io/f/xovdokao" method="POST">
-      <div class="field"><label for="name">Nom</label><input id="name" name="name" type="text" autocomplete="name" required /></div>
-      <div class="field"><label for="email">Adresse email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
-      <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="7" required></textarea></div>
-      <input type="hidden" name="_subject" value="Nouveau message depuis komjordan.fr" />
-      <button class="button primary" type="submit">Envoyer le message <span aria-hidden="true">→</span></button>
-      <p class="note">Le formulaire utilise l’identifiant Formspree déjà publié sur la version précédente du site. Vous pouvez aussi utiliser l’adresse email ci-contre.</p>
-    </form>
+    <h1 class="headline-apple">Échanger sur un projet<br/>ou une opportunité.</h1>
+    <p class="lead-apple">
+      Une question technique, une proposition de mission ou un projet d'infrastructure ? Transmettez votre message ci-dessous.
+    </p>
+  </header>
+
+  <section class="shell contact-wrapper">
+    <div class="contact-grid">
+      <div class="contact-info-panel">
+        <span class="bento-badge">COORDONNÉES</span>
+        <h2 class="contact-heading">Canaux professionnels</h2>
+        <p class="contact-subtext">
+          Basé en Région Parisienne (Vincennes), disponible pour des échanges techniques et opérationnels.
+        </p>
+
+        <div class="channel-list">
+          <a class="channel-item" href="mailto:axel@komjordan.fr">
+            <span class="channel-icon">@</span>
+            <div>
+              <span class="channel-label">Email direct</span>
+              <span class="channel-val">axel@komjordan.fr</span>
+            </div>
+          </a>
+          <a class="channel-item" href="https://www.linkedin.com/in/komjordan" target="_blank" rel="noreferrer">
+            <span class="channel-icon">in</span>
+            <div>
+              <span class="channel-label">LinkedIn</span>
+              <span class="channel-val">linkedin.com/in/komjordan</span>
+            </div>
+          </a>
+          <a class="channel-item" href="https://github.com/komjordan" target="_blank" rel="noreferrer">
+            <span class="channel-icon">git</span>
+            <div>
+              <span class="channel-label">GitHub</span>
+              <span class="channel-val">github.com/komjordan</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <form action="https://formspree.io/f/xovdokao" method="POST" class="apple-form">
+          <div class="form-field">
+            <label for="name">Nom ou Organisation</label>
+            <input type="text" id="name" name="name" required placeholder="Votre nom" />
+          </div>
+          <div class="form-field">
+            <label for="email">Adresse Email</label>
+            <input type="email" id="email" name="email" required placeholder="nom@entreprise.com" />
+          </div>
+          <div class="form-field">
+            <label for="subject">Objet</label>
+            <input type="text" id="subject" name="subject" placeholder="Ingénierie, sécurité, échange technique..." />
+          </div>
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Détaillez votre demande ou votre projet..."></textarea>
+          </div>
+          <button type="submit" class="cta-primary" style="width: 100%; justify-content: center;">
+            Envoyer le message <span>→</span>
+          </button>
+        </form>
+      </div>
+    </div>
   </section>
 </BaseLayout>

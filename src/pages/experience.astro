@@ -1,37 +1,191 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
 const roles = [
-  { dates: 'Nov. 2022 — Oct. 2023', role: 'Administrateur Réseaux & Systèmes', org: 'Stones and Gold', points: ['Supervision du parc avec Centreon, seuils d’alerte et rapports.', 'Sauvegardes et restaurations avec Veeam ; support de niveaux 1 et 2.', 'Administration des utilisateurs, droits et stratégies avec Active Directory et GPO.', 'MFA, chiffrement, analyse de logs Splunk, audits internes et documentation technique.'] },
-  { dates: 'Jan. 2022 — Août 2022', role: 'Assistant Administrateur Réseaux', org: 'SIGERIS SARL', points: ['Déploiement de commutateurs managés, VLAN, STP et priorisation du trafic.', 'Configuration OSPF, BGP et règles ACL sur équipements Cisco.', 'Services DHCP, DNS, FTP et AD DS ; tests de connectivité et procédures réseau.'] },
-  { dates: 'Juil. 2019 — Août 2019', role: 'Stagiaire', org: 'IUEs / INSAM, Bafoussam', points: ['Conception et déploiement d’une architecture VoIP avec Asterisk.', 'Configuration de postes SIP, tests de communication et documentation du projet.'] },
-  { dates: 'Sept. 2016 — Juil. 2018', role: 'Technicien Informatique', org: 'Envol Learn and Travel', points: ['Supervision de services avec Nagios et suivi des tickets dans GLPI.', 'Dépannage matériel, réinstallation système et maintenance de caméras IP.', 'Accompagnement des utilisateurs et sensibilisation aux pratiques de sécurité.'] },
+  {
+    dates: 'Nov. 2022 — Oct. 2023',
+    role: 'Administrateur Réseaux & Systèmes',
+    org: 'Stones and Gold',
+    type: 'CDI · Infrastructure & Production',
+    points: [
+      'Supervision proactive du parc de serveurs avec Centreon (définition des seuils critiques, escalade et métrologie).',
+      'Plan de sauvegarde et restauration des machines virtuelles critiques avec Veeam Backup & Replication ; support N1/N2.',
+      'Administration globale Active Directory (AD DS, contrôleurs de domaine, règles GPO durcies et gestion des habilitations).',
+      'Déploiement MFA, chiffrement des disques, centralisation et analyse de sécurité des logs Splunk, réalisation d’audits internes.'
+    ]
+  },
+  {
+    dates: 'Janv. 2022 — Août 2022',
+    role: 'Assistant Administrateur Réseaux',
+    org: 'SIGERIS SARL',
+    type: 'Stage & Mission · Ingénierie Réseau',
+    points: [
+      'Déploiement et segmentation de commutateurs managés : VLANs par service, Spanning Tree (STP) et priorisation QoS.',
+      'Configuration du routage dynamique OSPF et BGP, filtrage par listes de contrôle d’accès (ACLs) sur équipements Cisco.',
+      'Gestion des services d’infrastructure DHCP, DNS, FTP et annuaire Active Directory ; tests de performance et procédures.'
+    ]
+  },
+  {
+    dates: 'Juil. 2019 — Août 2019',
+    role: 'Stagiaire Télécoms & VoIP',
+    org: 'IUEs / INSAM',
+    type: 'Stage académique · Bafoussam',
+    points: [
+      'Conception et intégration d’un commutateur IPBX sous Linux avec Asterisk.',
+      'Configuration et répartition des postes SIP, plans de numérotation, validation des flux voix et rédaction des guides.'
+    ]
+  },
+  {
+    dates: 'Sept. 2016 — Juil. 2018',
+    role: 'Technicien Informatique',
+    org: 'Envol Learn and Travel',
+    type: 'Support & Maintenance',
+    points: [
+      'Surveillance continue des services réseau avec Nagios et gestion rigoureuse des incidents via la billetterie GLPI.',
+      'Dépannage matériel, déploiement système, câblage et maintenance de caméras de vidéosurveillance IP.',
+      'Sensibilisation des collaborateurs aux bonnes pratiques d’hygiène informatique et sécurité des mots de passe.'
+    ]
+  }
 ];
-const skills = [
-  ['Réseaux', 'TCP/IP, LAN, WAN, VLAN, NAT, ACL, QoS, RIP, OSPF, BGP, VPN, MPLS, Cisco, FortiGate et pfSense.'],
-  ['Systèmes & services', 'Windows Server, Linux Debian / Ubuntu / Red Hat, Active Directory, DNS, DHCP, DFS, FTP, iSCSI, WDS et GPO.'],
-  ['Cybersécurité & SIEM', 'Durcissement, segmentation, MFA, DLP, ELK, Wazuh, Splunk, Wireshark, Nmap, Metasploit, Burp Suite et Ghidra.'],
-  ['Virtualisation & sauvegarde', 'VMware vSphere, Proxmox, Hyper-V, HA, DRS, Fault Tolerance, Veeam Backup & Replication et stratégies de restauration.'],
-  ['Supervision & ITSM', 'Centreon, Zabbix, Nagios, SNMP, GLPI, gestion d’incidents et documentation.'],
-  ['Automatisation', 'Bash, PowerShell et Python pour le déploiement, le reporting, la supervision et l’analyse de journaux.'],
+
+const formations = [
+  {
+    dates: '2023 — 2025',
+    title: 'Master Ingénieur en Systèmes, Réseaux et Cybersécurité',
+    institution: 'ESIPE / Université Gustave Eiffel · Vincennes, France',
+    badge: 'Niveau 7 (Bac+5)'
+  },
+  {
+    dates: 'Février 2024',
+    title: 'Fortinet Certified Associate in Cybersecurity (FCA)',
+    institution: 'Fortinet Training Institute',
+    badge: 'Certification Officielle'
+  },
+  {
+    dates: '2020 — 2021',
+    title: 'Licence Professionnelle Administrateur Systèmes et Réseaux',
+    institution: 'IUEs / INSAM · Douala, Cameroun',
+    badge: 'Bac+3'
+  },
+  {
+    dates: '2019 — 2020',
+    title: 'BTS Réseaux et Sécurité',
+    institution: 'IUEs / INSAM · Bafoussam, Cameroun',
+    badge: 'Bac+2'
+  }
+];
+
+const skillMatrix = [
+  {
+    category: 'Réseaux & Routage',
+    desc: 'TCP/IP, LAN, WAN, VLAN 802.1Q, NAT, ACL, QoS, OSPF, BGP, VPN IPsec/OpenVPN, MPLS, commutateurs Cisco, FortiGate, pfSense.'
+  },
+  {
+    category: 'Systèmes & Annuaires',
+    desc: 'Windows Server (2019-2025), Debian, Ubuntu Server, Red Hat, Active Directory DS, DNS, DHCP, GPO, DFS, iSCSI, Samba.'
+  },
+  {
+    category: 'Cybersécurité & Détection',
+    desc: 'Wazuh SIEM/XDR, Splunk Enterprise, ELK, Wireshark, Nmap, durcissement CIS Benchmarks, MFA, segmentation réseau, Burp Suite.'
+  },
+  {
+    category: 'Virtualisation & PRA/PCA',
+    desc: 'VMware vSphere (ESXi, vCenter, vDS, HA, DRS), Proxmox VE, Hyper-V, Veeam Backup & Replication, VTL Quadstor, rétention PBS.'
+  },
+  {
+    category: 'Supervision & Exploitation',
+    desc: 'Centreon, Zabbix, Nagios, SNMP v2c/v3, GLPI (ITIL), gestion des changements, reporting et documentation technique d’architecture.'
+  },
+  {
+    category: 'Automatisation & Scripts',
+    desc: 'Bash, PowerShell, Python, Cloud-init, API REST Proxmox/Fortinet, industrialisation des déploiements et audits de conformité.'
+  }
 ];
 ---
-<BaseLayout title="Expérience & compétences — Axel KAMGAING KOM" description="Parcours professionnel, formation et compétences en administration systèmes, réseaux et cybersécurité.">
-  <header class="page-hero shell"><p class="eyebrow">Expérience</p><h1>Du terrain, des services et une méthode.</h1><p class="lede">Un parcours professionnel en support, administration réseau et système, prolongé par une formation d’ingénieur en systèmes, réseaux et cybersécurité.</p></header>
-  <section class="section section-rule shell">
-    <div class="section-head"><div><p class="eyebrow">Parcours / 01</p><h2>Expériences professionnelles</h2></div></div>
-    <div class="timeline">{roles.map((item) => <article class="timeline-item"><time>{item.dates}</time><div><h2>{item.role}<span>{item.org}</span></h2><ul>{item.points.map((point) => <li>{point}</li>)}</ul></div></article>)}</div>
+<BaseLayout title="Expérience & Compétences — Axel KAMGAING KOM" description="Parcours professionnel d'administrateur réseaux et systèmes, certifications et maîtrise technique.">
+  <!-- Hero Section -->
+  <header class="page-hero shell">
+    <div class="eyebrow-pill">
+      <span>PARCOURS & COMPÉTENCES</span>
+    </div>
+    <h1 class="headline-apple">Du terrain, des services<br/>et une méthode.</h1>
+    <p class="lead-apple">
+      Un parcours opérationnel en support et administration réseau/système, prolongé par une spécialisation d'ingénieur en cybersécurité des infrastructures.
+    </p>
+  </header>
+
+  <!-- Section 01 : Expériences professionnelles -->
+  <section class="section-apple shell">
+    <div class="section-title-wrap">
+      <span class="section-eyebrow">01 / PARCOURS OPÉRATIONNEL</span>
+      <h2 class="section-title">Expériences professionnelles</h2>
+    </div>
+
+    <div class="cards-stack">
+      {roles.map((item) => (
+        <article class="experience-card">
+          <div class="exp-top-row">
+            <div class="exp-heading">
+              <h3 class="exp-role">{item.role}</h3>
+              <div class="exp-company-badge">
+                <span class="company-name">{item.org}</span>
+                <span class="badge-sep">·</span>
+                <span class="contract-type">{item.type}</span>
+              </div>
+            </div>
+            <span class="exp-period">{item.dates}</span>
+          </div>
+          <ul class="exp-missions-list">
+            {item.points.map((p) => (
+              <li>{p}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
   </section>
-  <section class="section section-rule shell">
-    <div class="section-head"><div><p class="eyebrow">Compétences / 02</p><h2>Une lecture transversale du système.</h2></div><p class="lede">Les outils sont regroupés par fonction pour montrer comment réseau, identité, observabilité et reprise se répondent.</p></div>
-    <div class="skill-columns">{skills.map(([title, text]) => <article class="skill-group"><h3>{title}</h3><p>{text}</p></article>)}</div>
+
+  <!-- Section 02 : Formations & Certifications -->
+  <section class="section-apple shell">
+    <div class="section-title-wrap">
+      <span class="section-eyebrow">02 / FORMATION & CERTIFICATIONS</span>
+      <h2 class="section-title">Diplômes et accréditations</h2>
+    </div>
+
+    <div class="bento-grid">
+      {formations.map((f) => (
+        <div class="bento-card col-6">
+          <div>
+            <span class="bento-badge">{f.dates}</span>
+            <h3 class="bento-title" style="font-size: 1.25rem;">{f.title}</h3>
+            <p class="bento-desc" style="margin-bottom: 0.8rem;">{f.institution}</p>
+          </div>
+          <div>
+            <span class="pill-tag" style="color: var(--apple-blue); border-color: rgba(41, 151, 255, 0.3);">{f.badge}</span>
+          </div>
+        </div>
+      ))}
+    </div>
   </section>
-  <section class="section section-rule shell page-grid">
-    <aside class="sticky-aside"><p class="eyebrow">Formation / 03</p></aside>
-    <div class="timeline">
-      <article class="timeline-item"><time>2023 — 2025</time><div><h2>Master Ingénieur en Systèmes, Réseaux et Cybersécurité<span>Vincennes, France</span></h2></div></article>
-      <article class="timeline-item"><time>Février 2024</time><div><h2>Fortinet Certified Associate in Cybersecurity</h2></div></article>
-      <article class="timeline-item"><time>2020 — 2021</time><div><h2>Licence Administrateur Système et Réseaux<span>Douala, Cameroun</span></h2></div></article>
-      <article class="timeline-item"><time>2019 — 2020</time><div><h2>BTS Réseaux et Sécurité<span>Bafoussam, Cameroun</span></h2></div></article>
+
+  <!-- Section 03 : Matrice de compétences -->
+  <section class="section-apple shell">
+    <div class="section-title-wrap">
+      <span class="section-eyebrow">03 / MATRICE TECHNIQUE</span>
+      <h2 class="section-title">Une lecture transversale du système</h2>
+      <p class="section-lead">Les compétences sont articulées par pôle pour refléter la complémentarité réseau, identité, observabilité et résilience.</p>
+    </div>
+
+    <div class="bento-grid">
+      {skillMatrix.map((s) => (
+        <div class="bento-card col-4">
+          <div>
+            <span class="bento-badge">COMPÉTENCE CLÉ</span>
+            <h3 class="bento-title" style="font-size: 1.18rem;">{s.category}</h3>
+            <p class="bento-desc" style="font-size: 0.92rem;">{s.desc}</p>
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 </BaseLayout>

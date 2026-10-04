@@ -2,22 +2,75 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { categories, projects } from '../../data/projects';
 ---
-<BaseLayout title="Projets techniques — Axel KAMGAING KOM" description="Sept projets détaillés en SIEM, Active Directory, audit, sauvegarde, virtualisation et ITSM.">
-  <header class="page-hero shell"><p class="eyebrow">Index des projets</p><h1>Des laboratoires conçus pour apprendre en faisant.</h1><p class="lede">Filtrez le corpus par domaine. Chaque page détaille le contexte, la méthode, l’architecture et le niveau de documentation disponible.</p></header>
-  <section class="section section-rule shell" aria-labelledby="project-list-title">
-    <h2 id="project-list-title" class="sr-only">Liste des projets</h2>
-    <div class="filter-bar" aria-label="Filtrer les projets">
-      {categories.map((category, index) => <button class="filter-button" type="button" data-filter={category} aria-pressed={index === 0}>{category}</button>)}
+<BaseLayout title="Dossiers Techniques & Projets — Axel KAMGAING KOM" description="Sept études de cas techniques complètes en SIEM, Active Directory, audit, PRA et virtualisation.">
+  <!-- Hero Section -->
+  <header class="page-hero shell">
+    <div class="eyebrow-pill">
+      <span>DOSSIERS TECHNIQUES</span>
     </div>
-    <div class="project-index">
+    <h1 class="headline-apple">Des laboratoires conçus<br/>pour éprouver le réel.</h1>
+    <p class="lead-apple">
+      Chaque projet décrit une réalisation concrète : contexte, topologie, configuration détaillée, simulation de pannes ou d'attaques, et validation des résultats.
+    </p>
+  </header>
+
+  <section class="section-apple shell">
+    <!-- Interactive Filter Pills -->
+    <div class="filter-strip">
+      {categories.map((category, index) => (
+        <button class={`filter-pill ${index === 0 ? 'active' : ''}`} type="button" data-filter={category} aria-pressed={index === 0}>
+          {category}
+        </button>
+      ))}
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="bento-grid">
       {projects.map((project, index) => (
-        <a class="project-row" href={`/projets/${project.slug}/`} data-project data-category={project.category}>
-          <span class="project-number">0{index + 1}</span>
-          <span class="project-title">{project.shortTitle}</span>
-          <span class="project-meta"><span>{project.category}</span><span>·</span><span>{project.status}</span><span>·</span><time datetime={project.date}>{new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'short' }).format(new Date(project.date))}</time></span>
-          <span class="project-arrow" aria-hidden="true">↗</span>
-        </a>
+        <article class="bento-card col-6 project-item" data-project data-category={project.category}>
+          <div>
+            <div class="project-card-header">
+              <span class="bento-badge">{project.category}</span>
+              <span class="project-index-num">0{index + 1}</span>
+            </div>
+            <h3 class="bento-title">{project.title}</h3>
+            <p class="bento-desc">{project.summary}</p>
+            <div class="project-stack-pills">
+              {project.stack.slice(0, 4).map((tech) => (
+                <span class="pill-tag">{tech}</span>
+              ))}
+            </div>
+          </div>
+          <div class="card-bottom-action">
+            <a class="bento-link" href={`/projets/${project.slug}/`}>
+              Lire l'étude technique complète <span>↗</span>
+            </a>
+          </div>
+        </article>
       ))}
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const projectCards = document.querySelectorAll<HTMLElement>('[data-project]');
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      filterButtons.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      projectCards.forEach((card) => {
+        const cat = card.dataset.category;
+        const match = filter === 'Tous' || cat === filter;
+        card.style.display = match ? 'flex' : 'none';
+      });
+    });
+  });
+</script>
