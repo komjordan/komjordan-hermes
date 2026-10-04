@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Contact — Axel KAMGAING KOM" description="Contacter Axel KAMGAING KOM par email, LinkedIn ou via le formulaire sécurisé Formspree.">
+  <header class="page-hero shell"><p class="eyebrow">Contact</p><h1>Parlons infrastructure, sécurité ou prochaine mission.</h1><p class="lede">Un besoin, une question sur un projet ou une opportunité à partager ? Écrivez-moi directement.</p></header>
+  <section class="section section-rule shell contact-grid">
+    <div class="contact-direct">
+      <p class="eyebrow">Canaux directs</p>
+      <a href="mailto:axel@komjordan.fr">axel@komjordan.fr</a>
+      <a href="https://www.linkedin.com/in/komjordan" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+      <a href="https://github.com/komjordan" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </div>
+    <form class="contact-form" action="https://formspree.io/f/xovdokao" method="POST">
+      <div class="field"><label for="name">Nom</label><input id="name" name="name" type="text" autocomplete="name" required /></div>
+      <div class="field"><label for="email">Adresse email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+      <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="7" required></textarea></div>
+      <input type="hidden" name="_subject" value="Nouveau message depuis komjordan.fr" />
+      <button class="button primary" type="submit">Envoyer le message <span aria-hidden="true">→</span></button>
+      <p class="note">Le formulaire utilise l’identifiant Formspree déjà publié sur la version précédente du site. Vous pouvez aussi utiliser l’adresse email ci-contre.</p>
+    </form>
+  </section>
+</BaseLayout>

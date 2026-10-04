@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectDiagram from '../../components/ProjectDiagram.astro';
+import { projects, type Project } from '../../data/projects';
+export function getStaticPaths() { return projects.map((project) => ({ params: { slug: project.slug }, props: { project } })); }
+interface Props { project: Project; }
+const { project } = Astro.props;
+const index = projects.findIndex((item) => item.slug === project.slug);
+const next = projects[(index + 1) % projects.length];
+const date = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long' }).format(new Date(project.date));
+const articleSchema = {
+  '@context': 'https://schema.org', '@type': 'Article', headline: project.title, description: project.summary,
+  datePublished: project.date, inLanguage: 'fr-FR', author: { '@type': 'Person', name: 'Axel KAMGAING KOM' },
+  mainEntityOfPage: `https://komjordan.fr/projets/${project.slug}/`, image: 'https://komjordan.fr/og-default.svg'
+};
+---
+<BaseLayout title={`${project.title} — Axel KAMGAING KOM`} description={project.summary} type="article">
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <article>
+    <header class="project-hero shell">
+      <p class="eyebrow">Projet / {project.category}</p>
+      <h1>{project.title}</h1>
+      <p class="lede">{project.intro}</p>
+      <div class="project-facts"><span class="tag">{project.status}</span><time class="tag" datetime={project.date}>{date}</time>{project.stack.map((tool) => <span class="tag">{tool}</span>)}</div>
+    </header>
+    <div class="shell"><ProjectDiagram nodes={project.diagram.nodes} links={project.diagram.links} label={`Architecture simplifiée — ${project.shortTitle}`} /></div>
+    <div class="shell article-sections">
+      {project.sections.map((section, index) => (
+        <section id={`section-${index + 1}`}>
+          <div class="article-section-body">
+            <div><p class="eyebrow">0{index + 1}</p><h2>{section.title}</h2></div>
+            <div class="article-copy">
+              {section.body.map((paragraph) => <p>{paragraph}</p>)}
+              {section.points && <ul>{section.points.map((point) => <li>{point}</li>)}</ul>}
+              {section.code && <pre><code>{section.code}</code></pre>}
+            </div>
+          </div>
+        </section>
+      ))}
+      <nav class="project-next" aria-label="Projet suivant"><span><small class="mono">Projet suivant</small><br/><a class="text-link" href={`/projets/${next.slug}/`}>{next.shortTitle} →</a></span><a href="/projets/">Tous les projets</a></nav>
+    </div>
+  </article>
+</BaseLayout>

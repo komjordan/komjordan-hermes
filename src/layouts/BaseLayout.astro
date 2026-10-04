@@ -1,0 +1,78 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+const {
+  title = 'Axel KAMGAING KOM — Systèmes, Réseaux & Cybersécurité',
+  description = 'Portfolio d’Axel KAMGAING KOM, jeune diplômé en systèmes, réseaux et cybersécurité : projets techniques, parcours et contact.',
+  image = '/og-default.svg',
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Axel KAMGAING KOM',
+  url: 'https://komjordan.fr',
+  email: 'mailto:axel@komjordan.fr',
+  sameAs: ['https://www.linkedin.com/in/komjordan', 'https://github.com/komjordan'],
+  jobTitle: 'Jeune diplômé en systèmes, réseaux et cybersécurité',
+};
+---
+<!doctype html>
+<html lang="fr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0b0c" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="author" content="Axel KAMGAING KOM" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/rss+xml" title="Projets d’Axel KAMGAING KOM" href="/rss.xml" />
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Axel KAMGAING KOM" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem('theme');
+        const preferred = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.dataset.theme = saved || preferred;
+      })();
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <ClientRouter />
+  </head>
+  <body>
+    <Header />
+    <main id="contenu"><slot /></main>
+    <Footer />
+    <script src="../scripts/site.js"></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+---
+interface Props { nodes: string[]; links: [number, number][]; label?: string; }
+const { nodes, links, label = 'Schéma d’architecture du projet' } = Astro.props;
+const positions = nodes.map((_, index) => {
+  const columns = nodes.length > 4 ? 3 : 2;
+  const row = Math.floor(index / columns);
+  const col = index % columns;
+  return { x: 36 + col * (columns === 3 ? 31 : 52), y: 25 + row * 42 };
+});
+---
+<figure class="architecture" aria-label={label}>
+  <svg viewBox="0 0 100 100" role="img" aria-labelledby="diagram-title" preserveAspectRatio="xMidYMid meet">
+    <title id="diagram-title">{label}</title>
+    <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" /></marker></defs>
+    {links.map(([a,b]) => <line x1={positions[a].x} y1={positions[a].y} x2={positions[b].x} y2={positions[b].y} marker-end="url(#arrow)" />)}
+    {nodes.map((node,index) => <g><rect x={positions[index].x-14} y={positions[index].y-7} width="28" height="14" rx="1"/><text x={positions[index].x} y={positions[index].y+1}>{node}</text></g>)}
+  </svg>
+  <figcaption>Architecture simplifiée — représentation originale, non contractuelle.</figcaption>
+</figure>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://komjordan.fr/sitemap-index.xml

@@ -1,0 +1,53 @@
+---
+import { projects } from '../data/projects';
+const pathname = Astro.url.pathname;
+const nav = [
+  { href: '/a-propos/', label: 'À propos' },
+  { href: '/experience/', label: 'Expérience' },
+  { href: '/projets/', label: 'Projets' },
+  { href: '/contact/', label: 'Contact' },
+];
+const searchItems = [
+  { href: '/', title: 'Accueil', meta: 'Présentation' },
+  ...nav.map((item) => ({ href: item.href, title: item.label, meta: 'Page' })),
+  ...projects.map((project) => ({ href: `/projets/${project.slug}/`, title: project.shortTitle, meta: project.category })),
+];
+---
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="progress" aria-hidden="true"><span id="scroll-progress"></span></div>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="wordmark" href="/" aria-label="Accueil — Axel KAMGAING KOM">
+      <span class="wordmark-mark" aria-hidden="true">AK</span>
+      <span>Axel <b>KAMGAING KOM</b></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Navigation principale">
+      {nav.map((item) => <a href={item.href} aria-current={pathname.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>)}
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button search-trigger" type="button" aria-label="Rechercher" title="Rechercher (Ctrl K)">
+        <span aria-hidden="true">⌕</span><kbd>⌘K</kbd>
+      </button>
+      <button class="icon-button theme-toggle" type="button" aria-label="Passer au thème clair" title="Changer de thème">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.4-6.4L17 7m-10 10-1.4 1.4m12.8 0L17 17M7 7 5.6 5.6M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg>
+      </button>
+      <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Ouvrir le menu"><span></span><span></span></button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Navigation mobile" hidden>
+    {nav.map((item, index) => <a href={item.href}><span>0{index + 1}</span>{item.label}</a>)}
+  </nav>
+</header>
+<dialog class="command-palette" aria-labelledby="palette-title">
+  <div class="palette-head">
+    <span aria-hidden="true">⌕</span>
+    <label id="palette-title" class="sr-only" for="command-search">Rechercher dans le portfolio</label>
+    <input id="command-search" type="search" placeholder="Rechercher une page ou un projet…" autocomplete="off" />
+    <button class="palette-close" type="button" aria-label="Fermer">Esc</button>
+  </div>
+  <div class="palette-results" role="listbox" aria-label="Résultats">
+    {searchItems.map((item) => <a href={item.href} role="option" data-search={`${item.title} ${item.meta}`.toLowerCase()}><span>{item.title}</span><small>{item.meta}</small></a>)}
+    <p class="palette-empty" hidden>Aucun résultat.</p>
+  </div>
+  <p class="palette-hint"><kbd>↑</kbd><kbd>↓</kbd> naviguer <kbd>↵</kbd> ouvrir <kbd>Esc</kbd> fermer</p>
+</dialog>

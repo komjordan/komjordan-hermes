@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects } from '../data/projects';
+const featured = projects.slice(0, 4);
+---
+<BaseLayout>
+  <section class="shell hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Systèmes · Réseaux · Cybersécurité</p>
+      <h1 class="display">Observer.<br/><span class="accent">Comprendre.</span><br/>Sécuriser.</h1>
+      <p class="lede">Je suis Axel KAMGAING KOM, jeune diplômé en systèmes, réseaux et cybersécurité. Je documente ici des laboratoires où l’infrastructure, les journaux et les procédures deviennent lisibles.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="/projets/">Explorer les projets <span aria-hidden="true">↗</span></a>
+        <a class="button" href="/experience/">Lire le parcours</a>
+      </div>
+    </div>
+    <aside class="hero-side" aria-label="Périmètre technique">
+      <p class="status-line"><span class="status-dot"></span> Portfolio technique · France</p>
+      <ol class="scope-list">
+        <li><span>01</span>Détection & SIEM</li>
+        <li><span>02</span>Infrastructure système</li>
+        <li><span>03</span>Réseaux & segmentation</li>
+        <li><span>04</span>Sauvegarde & reprise</li>
+      </ol>
+    </aside>
+  </section>
+
+  <section class="section section-rule shell reveal">
+    <div class="section-head">
+      <div><p class="eyebrow">Dossiers récents</p><h2>La technique, avec ses preuves et ses limites.</h2></div>
+      <p class="lede">Chaque dossier part d’un objectif, expose l’architecture et distingue ce qui a été observé de ce qui reste à documenter.</p>
+    </div>
+    <div class="project-index">
+      {featured.map((project, index) => (
+        <a class="project-row" href={`/projets/${project.slug}/`}>
+          <span class="project-number">0{index + 1}</span>
+          <strong class="project-title">{project.shortTitle}</strong>
+          <span class="project-meta"><span>{project.category}</span><span>·</span><span>{project.status}</span></span>
+          <span class="project-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+    <p style="margin-top:2rem"><a class="text-link" href="/projets/">Voir les sept projets <span aria-hidden="true">→</span></a></p>
+  </section>
+
+  <section class="section shell reveal">
+    <div class="section-head"><div><p class="eyebrow">Méthode</p><h2>Décider avant de déployer.</h2></div></div>
+    <div class="principles">
+      <article class="principle"><span>01 / Cartographier</span><div><h3>Voir le système entier</h3><p>Identifier les dépendances, les flux et le périmètre avant d’agir.</p></div></article>
+      <article class="principle"><span>02 / Instrumenter</span><div><h3>Rendre les événements lisibles</h3><p>Collecter les journaux utiles et relier le signal à une action connue.</p></div></article>
+      <article class="principle"><span>03 / Vérifier</span><div><h3>Tester le retour attendu</h3><p>Valider une alerte, une politique ou une restauration dans un cadre contrôlé.</p></div></article>
+    </div>
+  </section>
+
+  <section class="section section-rule shell reveal">
+    <div class="section-head">
+      <div><p class="eyebrow">Trajectoire</p><h2>De l’assistance à l’ingénierie d’infrastructure.</h2></div>
+      <div><p class="lede">Un parcours construit entre support, réseau, administration système et sécurité, consolidé par un Master Ingénieur obtenu en 2025.</p><p style="margin-top:1.5rem"><a class="text-link" href="/a-propos/">Découvrir l’approche →</a></p></div>
+    </div>
+  </section>
+</BaseLayout>

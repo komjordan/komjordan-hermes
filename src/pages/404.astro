@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="404 — Signal introuvable" description="La page demandée n’existe pas." noindex>
+  <section class="shell hero" style="min-height:70vh">
+    <div class="hero-copy"><p class="eyebrow">Erreur 404</p><h1 class="display"><span class="accent">Signal</span><br/>introuvable.</h1><p class="lede">La route demandée n’existe pas ou a changé. Revenez à l’index ou utilisez la recherche avec <span class="mono">Ctrl K</span>.</p><div class="hero-actions"><a class="button primary" href="/">Retour à l’accueil</a><a class="button" href="/projets/">Voir les projets</a></div></div>
+    <aside class="hero-side mono" aria-hidden="true"><p style="color:var(--accent)">$ traceroute page</p><p style="margin-top:1rem;color:var(--muted)">1&nbsp; navigation.local&nbsp; ok<br/>2&nbsp; contenu.index&nbsp; ok<br/>3&nbsp; destination&nbsp; timeout</p></aside>
+  </section>
+</BaseLayout>

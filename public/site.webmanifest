@@ -1,0 +1,10 @@
+{
+  "name": "Axel KAMGAING KOM — Portfolio",
+  "short_name": "Axel KAMGAING KOM",
+  "description": "Portfolio systèmes, réseaux et cybersécurité.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0b0c",
+  "theme_color": "#f26a4f",
+  "icons": [{"src":"/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]
+}

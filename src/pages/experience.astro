@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const roles = [
+  { dates: 'Nov. 2022 — Oct. 2023', role: 'Administrateur Réseaux & Systèmes', org: 'Stones and Gold', points: ['Supervision du parc avec Centreon, seuils d’alerte et rapports.', 'Sauvegardes et restaurations avec Veeam ; support de niveaux 1 et 2.', 'Administration des utilisateurs, droits et stratégies avec Active Directory et GPO.', 'MFA, chiffrement, analyse de logs Splunk, audits internes et documentation technique.'] },
+  { dates: 'Jan. 2022 — Août 2022', role: 'Assistant Administrateur Réseaux', org: 'SIGERIS SARL', points: ['Déploiement de commutateurs managés, VLAN, STP et priorisation du trafic.', 'Configuration OSPF, BGP et règles ACL sur équipements Cisco.', 'Services DHCP, DNS, FTP et AD DS ; tests de connectivité et procédures réseau.'] },
+  { dates: 'Juil. 2019 — Août 2019', role: 'Stagiaire', org: 'IUEs / INSAM, Bafoussam', points: ['Conception et déploiement d’une architecture VoIP avec Asterisk.', 'Configuration de postes SIP, tests de communication et documentation du projet.'] },
+  { dates: 'Sept. 2016 — Juil. 2018', role: 'Technicien Informatique', org: 'Envol Learn and Travel', points: ['Supervision de services avec Nagios et suivi des tickets dans GLPI.', 'Dépannage matériel, réinstallation système et maintenance de caméras IP.', 'Accompagnement des utilisateurs et sensibilisation aux pratiques de sécurité.'] },
+];
+const skills = [
+  ['Réseaux', 'TCP/IP, LAN, WAN, VLAN, NAT, ACL, QoS, RIP, OSPF, BGP, VPN, MPLS, Cisco, FortiGate et pfSense.'],
+  ['Systèmes & services', 'Windows Server, Linux Debian / Ubuntu / Red Hat, Active Directory, DNS, DHCP, DFS, FTP, iSCSI, WDS et GPO.'],
+  ['Cybersécurité & SIEM', 'Durcissement, segmentation, MFA, DLP, ELK, Wazuh, Splunk, Wireshark, Nmap, Metasploit, Burp Suite et Ghidra.'],
+  ['Virtualisation & sauvegarde', 'VMware vSphere, Proxmox, Hyper-V, HA, DRS, Fault Tolerance, Veeam Backup & Replication et stratégies de restauration.'],
+  ['Supervision & ITSM', 'Centreon, Zabbix, Nagios, SNMP, GLPI, gestion d’incidents et documentation.'],
+  ['Automatisation', 'Bash, PowerShell et Python pour le déploiement, le reporting, la supervision et l’analyse de journaux.'],
+];
+---
+<BaseLayout title="Expérience & compétences — Axel KAMGAING KOM" description="Parcours professionnel, formation et compétences en administration systèmes, réseaux et cybersécurité.">
+  <header class="page-hero shell"><p class="eyebrow">Expérience</p><h1>Du terrain, des services et une méthode.</h1><p class="lede">Un parcours professionnel en support, administration réseau et système, prolongé par une formation d’ingénieur en systèmes, réseaux et cybersécurité.</p></header>
+  <section class="section section-rule shell">
+    <div class="section-head"><div><p class="eyebrow">Parcours / 01</p><h2>Expériences professionnelles</h2></div></div>
+    <div class="timeline">{roles.map((item) => <article class="timeline-item"><time>{item.dates}</time><div><h2>{item.role}<span>{item.org}</span></h2><ul>{item.points.map((point) => <li>{point}</li>)}</ul></div></article>)}</div>
+  </section>
+  <section class="section section-rule shell">
+    <div class="section-head"><div><p class="eyebrow">Compétences / 02</p><h2>Une lecture transversale du système.</h2></div><p class="lede">Les outils sont regroupés par fonction pour montrer comment réseau, identité, observabilité et reprise se répondent.</p></div>
+    <div class="skill-columns">{skills.map(([title, text]) => <article class="skill-group"><h3>{title}</h3><p>{text}</p></article>)}</div>
+  </section>
+  <section class="section section-rule shell page-grid">
+    <aside class="sticky-aside"><p class="eyebrow">Formation / 03</p></aside>
+    <div class="timeline">
+      <article class="timeline-item"><time>2023 — 2025</time><div><h2>Master Ingénieur en Systèmes, Réseaux et Cybersécurité<span>Vincennes, France</span></h2></div></article>
+      <article class="timeline-item"><time>Février 2024</time><div><h2>Fortinet Certified Associate in Cybersecurity</h2></div></article>
+      <article class="timeline-item"><time>2020 — 2021</time><div><h2>Licence Administrateur Système et Réseaux<span>Douala, Cameroun</span></h2></div></article>
+      <article class="timeline-item"><time>2019 — 2020</time><div><h2>BTS Réseaux et Sécurité<span>Bafoussam, Cameroun</span></h2></div></article>
+    </div>
+  </section>
+</BaseLayout>

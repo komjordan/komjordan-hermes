@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { categories, projects } from '../../data/projects';
+---
+<BaseLayout title="Projets techniques — Axel KAMGAING KOM" description="Sept projets détaillés en SIEM, Active Directory, audit, sauvegarde, virtualisation et ITSM.">
+  <header class="page-hero shell"><p class="eyebrow">Index des projets</p><h1>Des laboratoires conçus pour apprendre en faisant.</h1><p class="lede">Filtrez le corpus par domaine. Chaque page détaille le contexte, la méthode, l’architecture et le niveau de documentation disponible.</p></header>
+  <section class="section section-rule shell" aria-labelledby="project-list-title">
+    <h2 id="project-list-title" class="sr-only">Liste des projets</h2>
+    <div class="filter-bar" aria-label="Filtrer les projets">
+      {categories.map((category, index) => <button class="filter-button" type="button" data-filter={category} aria-pressed={index === 0}>{category}</button>)}
+    </div>
+    <div class="project-index">
+      {projects.map((project, index) => (
+        <a class="project-row" href={`/projets/${project.slug}/`} data-project data-category={project.category}>
+          <span class="project-number">0{index + 1}</span>
+          <span class="project-title">{project.shortTitle}</span>
+          <span class="project-meta"><span>{project.category}</span><span>·</span><span>{project.status}</span><span>·</span><time datetime={project.date}>{new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'short' }).format(new Date(project.date))}</time></span>
+          <span class="project-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
